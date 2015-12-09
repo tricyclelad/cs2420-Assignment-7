@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		409E89C41C17B49B008B42DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 409E89C31C17B49B008B42DB /* main.cpp */; };
+		409E89CC1C17BD06008B42DB /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 409E89CA1C17BD06008B42DB /* Graph.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		409E89C01C17B49B008B42DB /* CS2420 Assignment 7 Graphs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CS2420 Assignment 7 Graphs"; sourceTree = BUILT_PRODUCTS_DIR; };
 		409E89C31C17B49B008B42DB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		409E89CA1C17BD06008B42DB /* Graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graph.cpp; sourceTree = "<group>"; };
+		409E89CB1C17BD06008B42DB /* Graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				409E89C31C17B49B008B42DB /* main.cpp */,
+				409E89CA1C17BD06008B42DB /* Graph.cpp */,
+				409E89CB1C17BD06008B42DB /* Graph.h */,
 			);
 			path = "CS2420 Assignment 7 Graphs";
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				409E89CC1C17BD06008B42DB /* Graph.cpp in Sources */,
 				409E89C41C17B49B008B42DB /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
