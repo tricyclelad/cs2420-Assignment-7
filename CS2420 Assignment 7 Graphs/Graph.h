@@ -8,193 +8,146 @@
 
 #ifndef Graph_h
 #define Graph_h
-#include <vector>
 #include <stdio.h>
-#include <string>
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <sstream>
+
 using namespace std;
 
-class Edge
+struct Node
 {
-public:
-    int toNode;
-    int fromNode;
-    Edge *next; //Next edge in the list
-    
-    Edge(int from = -1, int to = -1, Edge *nextEdge = NULL){
-        toNode=to;
-        fromNode=from;
-        next = nextEdge;
-    }
-};
-class Node
-{
-public:
     int nodeID;
-    Edge *adjList; //Adjacency List
-    bool visited;
-    Node *whoIcameFrom;
-    int distanceFromTarget;
+    struct Node* next;
     
-    Node(int id = -1, Edge *List = NULL)
-    {
-        nodeID=id;
-        adjList = List;
-        visited=false;
-        whoIcameFrom = NULL;
-        distanceFromTarget=0;
-    }
 };
 
+/*
+ * Adjacency List
+ */
+struct AdjList
+{
+    struct Node *head;
+};
 
+/*
+ * Class Graph
+ */
 class Graph
 {
-protected:
-    Node *G;
-    int nodeCt;
-public:
-    Graph(int size) { G = new Node[size]; nodeCt = size;};
-    
-    
-    void BuildGraph(istream & input);
-};
-
 private:
-//    int V;
-//    struct AdjList* array;
-//public:
-//    Graph(int V)
-//    {
-//        this->V = V;
-//        array = new AdjList [V];
-//        for (int i = 0; i < V; ++i)
-//            array[i].head = NULL;
-//    }
-//    /*
-//     * Creating New Adjacency List Node
-//     */
-//    AdjListNode* newAdjListNode(int dest)
-//    {
-//        AdjListNode* newNode = new AdjListNode;
-//        newNode->dest = dest;
-//        newNode->next = NULL;
-//        return newNode;
-//    }
-//    /*
-//     * Adding Edge to Graph
-//     */
-//    void addEdge(int src, int dest)
-//    {
-//        AdjListNode* newNode = newAdjListNode(dest);
-//        newNode->next = array[src].head;
-//        array[src].head = newNode;
-//        newNode = newAdjListNode(src);
+    int size;
+   // struct AdjList* array;
+    vector<AdjList> array;
+public:
+    
+    Graph()
+    {
+        this->size = 0;
+    }
+    
+    Graph(int size)
+    {
+        this->size = size;
+        //array = new AdjList [size];
+        array.resize(size);
+        for (int i = 0; i < size; ++i)
+            array[i].head = NULL;
+    }
+   
+    Node* makeNode(int ID)
+    {
+        Node* newNode = new Node;
+        newNode->nodeID = ID;
+        newNode->next = NULL;
+        return newNode;
+    }
+    
+    void addEdge(int src, int dest)
+    {
+        Node* newNode = makeNode(dest);
+        newNode->next = array[src].head;
+        array[src].head = newNode;
+        
+//        Node* newNode = makeNode(src);
 //        newNode->next = array[dest].head;
 //        array[dest].head = newNode;
-//    }
-//    /*
-//     * Print the graph
-//     */
-//    void printGraph()
-//    {
-//        int v;
-//        for (v = 0; v < V; ++v)
-//        {
-//            AdjListNode* pCrawl = array[v].head;
-//            cout<<"\n Adjacency list of vertex "<<v<<"\n head ";
-//            while (pCrawl)
-//            {
-//                cout<<"-> "<<pCrawl->dest;
-//                pCrawl = pCrawl->next;
-//            }
-//            cout<<endl;
-//        }
-//    }
-
-
-#endif /* Graph_h */
-
-
-
-
-
-///*
-// * C++ Program to Implement Adjacency List
-// */
-//#include <iostream>
-//#include <cstdlib>
-//using namespace std;
-//
-///*
-// * Adjacency List Node
-// */
-//struct AdjListNode
-//{
-//    int dest;
-//    struct AdjListNode* next;
-//};
-//
-///*
-// * Adjacency List
-// */
-//struct AdjList
-//{
-//    struct AdjListNode *head;
-//};
-//
-///*
-// * Class Graph
-// */
-//class Graph
-//{
-//private:
-//    int V;
-//    struct AdjList* array;
-//public:
-//    Graph(int V)
-//    {
-//        this->V = V;
-//        array = new AdjList [V];
-//        for (int i = 0; i < V; ++i)
-//            array[i].head = NULL;
-//    }
-//    /*
-//     * Creating New Adjacency List Node
-//     */
-//    AdjListNode* newAdjListNode(int dest)
-//    {
-//        AdjListNode* newNode = new AdjListNode;
-//        newNode->dest = dest;
-//        newNode->next = NULL;
-//        return newNode;
-//    }
-//    /*
-//     * Adding Edge to Graph
-//     */
-//    void addEdge(int src, int dest)
-//    {
-//        AdjListNode* newNode = newAdjListNode(dest);
-//        newNode->next = array[src].head;
-//        array[src].head = newNode;
-//        newNode = newAdjListNode(src);
-//        newNode->next = array[dest].head;
-//        array[dest].head = newNode;
-//    }
-//    /*
-//     * Print the graph
-//     */
-//    void printGraph()
-//    {
-//        int v;
-//        for (v = 0; v < V; ++v)
-//        {
-//            AdjListNode* pCrawl = array[v].head;
-//            cout<<"\n Adjacency list of vertex "<<v<<"\n head ";
-//            while (pCrawl)
-//            {
-//                cout<<"-> "<<pCrawl->dest;
-//                pCrawl = pCrawl->next;
-//            }
-//            cout<<endl;
-//        }
-//    }
-//};
+    }
+    void print()
+    {
+        for (int i = 0; i < size; i++)
+        {
+            Node* pCrawl = array[i].head;
+            cout<<"\n Node "<< i <<"\n";
+            while (pCrawl)
+            {
+                cout<<"-> "<<pCrawl->nodeID;
+                pCrawl = pCrawl->next;
+            }
+            cout<<endl;
+        }
+    }
+    
+    void buildGraph(string fileName)
+    {
+        ifstream fin;
+            
+        fin.open(fileName);
+            
+        if (fin.fail())   // callling the member function to verify
+        {
+            cout << "the file " << fileName << " was not found" << endl ;
+            fin.close() ;
+        }
+        else
+        {
+            cout << "the file " << fileName << " was found" << endl ;
+            char fileWord[80];
+            //string fileWord = " ";
+            
+            /*
+                while(!fin.eof())
+                {
+                fin.getline(info, 80);
+                cout << info << endl ;
+                }
+            */
+            
+            //Get the number of nodes
+            fin.getline(fileWord, 80);
+            stringstream ss(fileWord);
+            int nodeSize;
+            ss >> nodeSize;
+            ss.clear();
+            
+            //Resize the graph and "initialize" it to null
+            this->size = nodeSize;
+            array.resize(size);
+            for (int i = 0; i < size; i++)
+                array[i].head = NULL;
+            
+            int edgeCount;
+            fin.getline(fileWord, 80);
+            
+            ss.str(fileWord);
+            ss >> edgeCount;
+            ss.clear();
+            
+            int source;
+            int dest;
+            
+            while (fin.getline(fileWord, 80))
+            {
+             // cout << fileWord << endl;
+                ss.str(fileWord);
+                ss >> source >> dest;
+                addEdge(source, dest);
+                ss.clear();
+            }
+        }
+        fin.close() ; // close the file handler once the operations are done
+    }
+    
+};
+#endif
