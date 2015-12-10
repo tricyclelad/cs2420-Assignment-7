@@ -243,6 +243,7 @@
 				409E89C91C17B49B008B42DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

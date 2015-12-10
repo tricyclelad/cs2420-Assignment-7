@@ -29,6 +29,12 @@ int main()
     
     Graph g;
     g.buildGraph("digraph1.txt");
-    g.print();
+   // g.print();
+    
+    g.test(6, 11);
+    
+    Graph h;
+    h.buildGraph("digraph2.txt");
+    h.print();
     return 0;
 }
